@@ -1,17 +1,12 @@
-import { Message } from '@prisma/client';
 import React from 'react';
 import clsx from 'clsx';
-
-interface ChatMessage extends Message {
-  timestamp: string;
-}
+import { ChatMessage } from '@/types/chat';
 
 interface MessageListProps {
   messages: ChatMessage[];
 }
 
 export function MessageList({ messages }: MessageListProps) {
-  console.log('MessageList', messages);
   return (
     <div className="h-[400px] w-full overflow-y-auto bg-secondary/10 rounded-md border">
       <div className="p-4 space-y-4">
@@ -43,7 +38,10 @@ export function MessageList({ messages }: MessageListProps) {
                 'text-right': message.author !== 'Bot',
               })}
             >
-              {new Date(message.timestamp).toLocaleTimeString()}
+              {new Date(message.timestamp).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
             </span>
           </div>
         ))}
