@@ -22,6 +22,10 @@ export default function AdminDashboard() {
     <>
       <Head>
         <title>Admin Dashboard - Chat Messages</title>
+        <meta
+          name="description"
+          content="Admin Dashboard for viewing and managing chat messages. Monitor and review all chat interactions with ease."
+        />
       </Head>
       <div className="min-h-screen bg-gray-100 p-4">
         <div className="container mx-auto max-w-4xl">
