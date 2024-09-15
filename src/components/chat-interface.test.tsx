@@ -2,8 +2,14 @@ import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { ChatInterface } from '@/components/chat-interface';
 import { render } from '../lib/test-utils';
+import { axe } from 'jest-axe';
 
 describe('ChatInterface with real API', () => {
+  it('should have no accessibility violations', async () => {
+    const { container } = render(<ChatInterface />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
   it('should allow a user to type a message, send it, and receive a bot response', async () => {
     render(<ChatInterface />);
 
@@ -24,7 +30,7 @@ describe('ChatInterface with real API', () => {
         expect(screen.getByText(/test user:/i)).toBeInTheDocument();
         expect(screen.getByText(/hello bot!/i)).toBeInTheDocument();
       },
-      { timeout: 2000 }
+      { timeout: 3000 }
     );
 
     await waitFor(
