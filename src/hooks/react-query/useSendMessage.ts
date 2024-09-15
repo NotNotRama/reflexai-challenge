@@ -7,16 +7,16 @@ interface SendMessageVariables {
   content: string;
 }
 
-export const useSendMessage = (
+export function useSendMessage(
   options?: UseMutationOptions<
     { userMessage: Message; botMessage: Message },
     Error,
     SendMessageVariables
   >
-) => {
+) {
   return useMutation({
     mutationFn: ({ author, content }: SendMessageVariables) =>
       chatClient.sendMessage(author, content),
     ...options,
   });
-};
+}

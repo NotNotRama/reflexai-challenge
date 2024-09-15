@@ -6,7 +6,7 @@ interface ChatMessage extends Message {
   timestamp: string;
 }
 
-export const useChatMessages = (userName: string) => {
+export function useChatMessages(userName: string) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
   const sendMessage = useSendMessage({
@@ -33,4 +33,4 @@ export const useChatMessages = (userName: string) => {
   });
 
   return { messages, sendMessage };
-};
+}
