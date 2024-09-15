@@ -19,7 +19,11 @@ export function MessageInput({ onSendMessage, isPending }: MessageInputProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full space-x-2">
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-full space-x-2"
+      data-testid="message-input-form"
+    >
       <Input
         type="text"
         value={message}
