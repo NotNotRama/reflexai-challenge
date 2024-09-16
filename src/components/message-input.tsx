@@ -5,9 +5,14 @@ import { Button } from '@/components/ui/button';
 interface MessageInputProps {
   onSendMessage: (content: string) => void;
   isPending: boolean;
+  isError: boolean;
 }
 
-export function MessageInput({ onSendMessage, isPending }: MessageInputProps) {
+export function MessageInput({
+  onSendMessage,
+  isPending,
+  isError,
+}: MessageInputProps) {
   const [message, setMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -23,6 +28,7 @@ export function MessageInput({ onSendMessage, isPending }: MessageInputProps) {
       onSubmit={handleSubmit}
       className="flex w-full space-x-2"
       data-testid="message-input-form"
+      aria-describedby={isError ? 'message-send-error' : undefined}
     >
       <Input
         type="text"

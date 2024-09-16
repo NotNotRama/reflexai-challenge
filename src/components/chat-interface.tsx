@@ -62,6 +62,7 @@ function ChatInterfaceContent() {
             handleSendMessage({ content, userName, sendMessage, setError })
           }
           isPending={sendMessage.isPending}
+          isError={sendMessage.isError}
         />
       </CardFooter>
     </Card>
