@@ -28,9 +28,6 @@ This project is a simple chatbot application built with Next.js (pages router), 
 
 ## Installation
 
-### Prerequisites
-
-
 ### Steps
 
 1. Clone the repository:
