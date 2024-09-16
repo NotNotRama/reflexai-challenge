@@ -14,16 +14,8 @@ import { useChatMessages } from '@/hooks/useChatMessages';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { MessageInput } from './message-input';
-import { useGetAllMessages } from '@/hooks/react-query/useGetAllMessages';
-
 export function ChatInterface() {
   const [userName, setUserName] = useState('');
-  const { data: test, isLoading, error } = useGetAllMessages();
-
-  console.log('test', test);
-  console.log('isLoading', isLoading);
-  console.log('error', error);
-
   const { messages, sendMessage } = useChatMessages(userName);
 
   return (
