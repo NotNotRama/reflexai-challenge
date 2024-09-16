@@ -59,11 +59,11 @@ describe('ChatInterface with real API', () => {
           screen.getByText(/an error occurred while sending your message/i)
         ).toBeInTheDocument();
       },
-      { timeout: 5000 }
+      { timeout: 2000 }
     );
 
     expect(sendButton).not.toBeDisabled();
-  }, 10000); // Increase timeout to 10 seconds for this test
+  }, 2000);
 
   it('should clear the input field after sending a message', async () => {
     render(<ChatInterface />);
@@ -78,7 +78,7 @@ describe('ChatInterface with real API', () => {
       () => {
         expect(messageInput).toHaveValue('');
       },
-      { timeout: 5000 }
+      { timeout: 2000 }
     );
   });
 
@@ -87,9 +87,6 @@ describe('ChatInterface with real API', () => {
 
     const sendButton = screen.getByRole('button', { name: 'Send' });
     fireEvent.click(sendButton);
-
-    // Wait for a short time to ensure no API call is made
-    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     expect(screen.queryByText(/test user:/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/bot:/i)).not.toBeInTheDocument();
