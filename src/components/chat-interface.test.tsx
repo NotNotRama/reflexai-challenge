@@ -25,7 +25,7 @@ describe('ChatInterface with real API', () => {
 
     await waitFor(
       () => expect(screen.getByText(/bot is typing.../i)).toBeInTheDocument(),
-      { timeout: 5000 }
+      { timeout: 2000 }
     );
 
     await waitFor(
@@ -34,12 +34,12 @@ describe('ChatInterface with real API', () => {
         expect(screen.getByText(/hello bot!/i)).toBeInTheDocument();
         expect(screen.getByText(/bot:/i)).toBeInTheDocument();
       },
-      { timeout: 5000 }
+      { timeout: 2000 }
     );
 
     const botResponses = screen.getAllByText(/bot:/i);
     expect(botResponses.length).toBeGreaterThan(0);
-  }, 10000);
+  }, 2000);
 
   it('should handle errors gracefully', async () => {
     render(<ChatInterface />);
