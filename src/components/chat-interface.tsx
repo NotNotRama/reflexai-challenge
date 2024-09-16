@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import {
   Card,
   CardContent,
@@ -14,9 +15,17 @@ import { useChatMessages } from '@/hooks/useChatMessages';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { MessageInput } from './message-input';
-export function ChatInterface() {
+import { ErrorFallback } from './error-fallback';
+import { handleSendMessage } from '@/lib/utils';
+
+function ChatInterfaceContent() {
   const [userName, setUserName] = useState('');
+  const [error, setError] = useState<Error | null>(null);
   const { messages, sendMessage } = useChatMessages(userName);
+
+  if (error) {
+    throw error;
+  }
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
@@ -50,11 +59,19 @@ export function ChatInterface() {
       <CardFooter>
         <MessageInput
           onSendMessage={(content) =>
-            sendMessage.mutate({ author: userName, content })
+            handleSendMessage({ content, userName, sendMessage, setError })
           }
           isPending={sendMessage.isPending}
         />
       </CardFooter>
     </Card>
+  );
+}
+
+export function ChatInterface() {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <ChatInterfaceContent />
+    </ErrorBoundary>
   );
 }
