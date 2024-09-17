@@ -22,6 +22,7 @@ export function handleSendMessage({
       throw new Error('This is a simulated error from the app');
     }
     sendMessage.mutate({ author: userName, content });
+    setError(null);
   } catch (err) {
     setError(err as Error);
   }

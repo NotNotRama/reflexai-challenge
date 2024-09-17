@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import {
   Card,
@@ -23,9 +23,11 @@ function ChatInterfaceContent() {
   const [error, setError] = useState<Error | null>(null);
   const { messages, sendMessage } = useChatMessages(userName);
 
-  if (error) {
-    throw error;
-  }
+  useEffect(() => {
+    if (error) {
+      throw error;
+    }
+  }, [error]);
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
